@@ -8,7 +8,8 @@ import Launch from './components/Launch';
 import './App.css';
 
 const client = new ApolloClient({
-  uri: '/graphql'
+  // For deployment to heroku, change this back to uri: '/graphql'
+  uri: 'http://localhost:5000/graphql'
 });
 
 function App() {

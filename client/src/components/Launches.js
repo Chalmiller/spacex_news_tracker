@@ -11,6 +11,10 @@ query LaunchesQuery {
         mission_name
         launch_date_local
         launch_success
+        links {
+            video_link
+            flickr_images
+        }
     }
 }
 `;

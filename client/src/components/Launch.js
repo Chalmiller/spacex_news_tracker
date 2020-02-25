@@ -3,6 +3,7 @@ import gql from 'graphql-tag';
 import { Query } from 'react-apollo';
 import { Link } from 'react-router-dom';
 import classNames from 'classnames';
+import Iframe from 'react-iframe'
 
 const LAUNCH_QUERY = gql`
   query LaunchQuery($flight_number: Int!) {
@@ -16,6 +17,10 @@ const LAUNCH_QUERY = gql`
         rocket_id
         rocket_name
         rocket_type
+      }
+      links {
+        video_link
+        flickr_images
       }
     }
   }
@@ -37,7 +42,8 @@ export class Launch extends Component {
               flight_number,
               launch_year,
               launch_success,
-              rocket: { rocket_id, rocket_name, rocket_type }
+              rocket: { rocket_id, rocket_name, rocket_type },
+              links: { video_link, flickr_images }
             } = data.launch;
 
             return (
@@ -69,6 +75,25 @@ export class Launch extends Component {
                 <h4 className="my-3">Rocket Details</h4>
                 <ul className="list-group">
                   <li className="list-group-item">Rocket ID: {rocket_id}</li>
+                  <li className="list-group-item">
+                    Rocket Name: {rocket_name}
+                  </li>
+                  <li className="list-group-item">
+                    Rocket Type: {rocket_type}
+                  </li>
+                </ul>
+
+                <h4 className="my-3">Media Links</h4>
+                <ul className="list-group">
+                  <li className="list-group-item">
+                  <Iframe url={ video_link }
+                          width="450px"
+                          height="450px"
+                          id="myId"
+                          className="myClassname"
+                          display="initial"
+                          position="relative"/>
+                  </li>
                   <li className="list-group-item">
                     Rocket Name: {rocket_name}
                   </li>

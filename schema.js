@@ -23,9 +23,25 @@ const LaunchType = new GraphQLObjectType({
         },
         rocket: {
             type: RocketType
+        },
+        links: {
+            type: LinksType
         }
     })
 });
+
+// Links Type
+const LinksType = new GraphQLObjectType({
+    name: 'Links',
+    fields: () => ({
+        video_link: {
+            type: GraphQLString
+        },
+        flickr_images: {
+            type: new GraphQLList(GraphQLString)
+        }
+    })
+})
 
 // Rocket Type
 const RocketType = new GraphQLObjectType({
