@@ -3,7 +3,8 @@ import gql from 'graphql-tag';
 import { Query } from 'react-apollo';
 import { Link } from 'react-router-dom';
 import classNames from 'classnames';
-import Iframe from 'react-iframe'
+import Images from './Images';
+import ReactPlayer from 'react-player';
 
 const LAUNCH_QUERY = gql`
   query LaunchQuery($flight_number: Int!) {
@@ -45,6 +46,7 @@ export class Launch extends Component {
               rocket: { rocket_id, rocket_name, rocket_type },
               links: { video_link, flickr_images }
             } = data.launch;
+            console.log(video_link);
 
             return (
               <div>
@@ -83,24 +85,21 @@ export class Launch extends Component {
                   </li>
                 </ul>
 
-                <h4 className="my-3">Media Links</h4>
+                <h4 className="my-3">Launch Video</h4>
                 <ul className="list-group">
                   <li className="list-group-item">
-                  <Iframe url={ video_link }
-                          width="450px"
-                          height="450px"
-                          id="myId"
-                          className="myClassname"
-                          display="initial"
-                          position="relative"/>
-                  </li>
-                  <li className="list-group-item">
-                    Rocket Name: {rocket_name}
-                  </li>
-                  <li className="list-group-item">
-                    Rocket Type: {rocket_type}
+                  <ReactPlayer url={ video_link } width="450px"
+                          height="450px"/>
                   </li>
                 </ul>
+                
+                  <h4 className="my-3">Launch Images</h4>
+                  <ul className="list-group">
+                    <li className="list-group-item">
+                      <Images props={ flickr_images } />
+                    </li>
+                  </ul>
+                
                 <hr />
                 <Link to="/" className="btn btn-secondary">
                   Back
