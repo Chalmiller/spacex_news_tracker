@@ -37,7 +37,7 @@ const LinksType = new GraphQLObjectType({
         video_link: {
             type: GraphQLString
         },
-        flickr_images: {
+        {
             type: new GraphQLList(GraphQLString)
         }
     })
